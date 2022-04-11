@@ -1,4 +1,4 @@
-package com.edugrade.rentalwebsite.entities;
+package edugrade.rentalwebsite.entities;
 
 
 import javax.persistence.*;

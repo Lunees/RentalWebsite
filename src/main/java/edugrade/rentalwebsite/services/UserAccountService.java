@@ -1,7 +1,7 @@
-package com.edugrade.rentalwebsite.services;
+package edugrade.rentalwebsite.services;
 
-import com.edugrade.rentalwebsite.entities.UserAccount;
-import com.edugrade.rentalwebsite.entities.Role;
+import edugrade.rentalwebsite.entities.UserAccount;
+import edugrade.rentalwebsite.entities.Role;
 
 import java.util.List;
 

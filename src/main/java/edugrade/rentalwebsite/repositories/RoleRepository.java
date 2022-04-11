@@ -1,6 +1,6 @@
-package com.edugrade.rentalwebsite.repositories;
+package edugrade.rentalwebsite.repositories;
 
-import com.edugrade.rentalwebsite.entities.Role;
+import edugrade.rentalwebsite.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
