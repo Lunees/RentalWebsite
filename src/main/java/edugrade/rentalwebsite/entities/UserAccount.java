@@ -9,18 +9,30 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 public class UserAccount {
-    @Id @GeneratedValue(strategy = AUTO)
-    private long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String username;
+
     private String password;
+
     @ManyToMany(fetch = EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    public long getId() {
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,7 +62,7 @@ public class UserAccount {
 
     public UserAccount(){}
 
-    public UserAccount(long id, String username, String password, Collection<Role> roles) {
+    public UserAccount(Integer id, String username, String password, Collection<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
