@@ -17,6 +17,7 @@ import java.util.List;
 
 
 
+
 @Service @Transactional
 public class UserAccountImplementation implements UserAccountService, UserDetailsService {
     private final UserAccountRepository userAccountRepository;
@@ -40,28 +41,28 @@ public class UserAccountImplementation implements UserAccountService, UserDetail
             log.info("User found in the database: {}", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        userAccount.getRoles().forEach(role ->  {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+        userAccount.getRoles().forEach(role ->
+            authorities.add(new SimpleGrantedAuthority(role.getName())));
+
 
         return new org.springframework.security.core.userdetails.User(userAccount.getUsername(), userAccount.getPassword(),authorities);
         }
 
     @Override
     public UserAccount saveUser(UserAccount user) {
-        log.info("Saving new user {} to the database", user.getUsername());
+        log.info("Saving new user {} to the database", user);
         return userAccountRepository.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
-        log.info("Saving new role {} to the database", role.getName());
+        log.info("Saving new role {} to the database", role);
         return roleRepository.save(role);
     }
 
     @Override
     public void addRoleToUserAccount(String username, String roleName) {
-        log.info("Adding the role {} to user {}", roleName, username);
+        log.info("Adding the role {} to user {}", roleName,username);
         UserAccount userAccount = userAccountRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
         userAccount.getRoles().add(role);
@@ -70,7 +71,7 @@ public class UserAccountImplementation implements UserAccountService, UserDetail
 
     @Override
     public UserAccount getUser(String username) {
-        log.info("Fetching user {}", username);
+        log.info("Fetching user {}",username);
         return userAccountRepository.findByUsername(username);
     }
 

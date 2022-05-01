@@ -1,0 +1,17 @@
+To-do
+
+#Finish Database
+finish entities
+finish tables
+finish sql scripts
+
+#Finish HTML
+Webpages
+
+
+
+#Finish CRUD functions
+Controllers
+
+
+#Finish Security

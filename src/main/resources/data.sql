@@ -8,5 +8,3 @@ INSERT INTO customer (firstName, lastName, address, phoneNumber) VALUES ('Jonas'
                                                                         ('Daniel','Säfström','pastorsvägen 25',071725712);
 
 INSERT INTO useraccount (username, password) VALUES ('Administrator','Tomaslirarhockey');
-
-
