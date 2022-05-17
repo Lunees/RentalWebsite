@@ -1,12 +1,16 @@
 package edugrade.rentalwebsite.entities;
 
+import org.hibernate.Hibernate;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer customerId;
 
     private String firstName;
 
@@ -16,20 +20,24 @@ public class Customer {
 
     private Integer phoneNumber;
 
-    public Integer getPhoneNumber() {
-        return phoneNumber;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private UserAccount userAccount;
+
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -40,22 +48,52 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setFirstName(String name) {
-        this.firstName = name;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
 
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
 
+    public Customer() {
+    }
+
+    public Customer(Integer customerId, String firstName, String lastName, String address, Integer phoneNumber, UserAccount userAccount) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.userAccount = userAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Customer customer = (Customer) o;
+        return customerId != null && Objects.equals(customerId, customer.customerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

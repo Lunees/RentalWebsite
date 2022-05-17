@@ -1,10 +1,11 @@
-package edugrade.rentalwebsite.controllers;
+package edugrade.rentalwebsite.WebServices;
 
 
 import edugrade.rentalwebsite.entities.Role;
 import edugrade.rentalwebsite.entities.UserAccount;
 import edugrade.rentalwebsite.services.UserAccountService;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,23 +13,29 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/api")
-@RestController
-public class UserAccountController {
+
+public class RegisterController {
+
     private final UserAccountService userAccountService;
 
-    public UserAccountController(UserAccountService userAccountService) {
+    @Autowired
+    public RegisterController(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
     }
-        @GetMapping("/user-Account")
+        @GetMapping("/user")
         public ResponseEntity<List<UserAccount>>getUsers(){
-            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user-Account/save").toUriString());
-            return ResponseEntity.created(uri).body(userAccountService.getUsers());
+            return ResponseEntity.ok().body(userAccountService.getUsers());
+        }
+
+        @PostMapping("/user/save")
+        public ResponseEntity<UserAccount>saveUser(@RequestBody UserAccount userAccount){
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/Register/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userAccountService.saveUser(userAccount));
         }
 
         @PostMapping("/role/save")
         public ResponseEntity<Role>saveRole(@RequestBody Role role) {
-            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/register/role/save").toUriString());
             return ResponseEntity.created(uri).body(userAccountService.saveRole(role));
         }
 
@@ -39,8 +46,8 @@ public class UserAccountController {
             return ResponseEntity.ok().build();
 
     }
-
-    static class RoleToUserForm {
+}
+    class RoleToUserForm {
         private String userAccountName;
         private String roleName;
 
@@ -60,4 +67,4 @@ public class UserAccountController {
             this.roleName = roleName;
         }
     }
-}
+

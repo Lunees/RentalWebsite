@@ -1,18 +1,48 @@
 <div th:fragment="topnav">
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand">Wigells</a>
-    <div class="container-sm">
-        <ul class="nav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand mt-2 mt-lg-0" href="/index">
+         Wigell
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Bilfan</a>
+            <a class="nav-link" href="/cars">Bilar du kan hyra</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">test</a>
+            <a class="nav-link" href="/orders/customer-id">Kolla dina ordrar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/cars">Cars</a>
+            <a class="nav-link" href="/bookingform">Hyr bil!</a>
           </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Registrera konto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logga in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logga ut</a>
+            </li>
         </ul>
+      </div>
+
+
+
+      <div class="d-flex align-items-center">
+      </div>
     </div>
   </nav>
 </div>

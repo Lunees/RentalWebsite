@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Wigells Rental</title>
     <meta charset="utf-8">
@@ -20,20 +20,41 @@
     <div class="row g-3">
         <div class="col-lg-2">
             <div th:replace="constants/LeftBar :: leftBar">
-
             </div>
         </div>
 
         <div class="col-lg-8">
 
-            <div>
-                <h1>Temp</h1>
+            <div class="container-fluid">
+                <h1>Boka Bil</h1>
                 <p></p>
                 <hr>
-                <h3>Temp</h3>
+                <h3>Ange uppgifter!</h3>
                 <p>
+
+
+                <div>
+                    <form th:action="@{/bookingform/save}" th:object="${rentOrderWrapper}" method="post" >
+                        <label for="carId">
+                            <select th:field="${carOptions}" class="form-control" id="carId">
+                                <option value="0">Välj bil!</option>
+                                <option th:each="carOptions : ${carOptions}" th:value="${carOptions.carId}" th:text="${carOptions.carBrand + ' ' + carOptions.carModel}"></option>
+                            </select>
+                        </label>
+                        <label>
+                            <input class="form-control" id="account_Id" type="text" th:value="${customerId.accountId}"/>
+
+
+                        </label>
+                        <input type="submit" value="Hyr bil!">
+                    </form>
+                </div>
+
             </div>
+
+
         </div>
+
 
         <div class="col-lg-2">
 
@@ -42,10 +63,10 @@
             </div>
 
         </div>
-
     </div>
-
 </div>
+
+
 
 <div th:replace="constants/Footer :: footer">
 
