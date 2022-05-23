@@ -1,59 +1,54 @@
 package edugrade.rentalwebsite.entities;
 
 import org.hibernate.Hibernate;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 
 @Entity
-public class RentalOrder {
+public class RentalOrder  {
     @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private RentalOrderId rentalOrderId;
+    private RentalOrderId Id;
 
-
-
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "account_Idfk", nullable = false,updatable = false,insertable = false)
-    private UserAccount userAccount;
-
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "car_Idfk", nullable = false,updatable = false,insertable = false)
-    private Car car;
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public UserAccount getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
-    }
-
-    public RentalOrderId getRentalOrderId() {
-        return rentalOrderId;
-    }
-
-    public void setRentalOrderId(RentalOrderId rentalOrderId) {
-        this.rentalOrderId = rentalOrderId;
-    }
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateFrom;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateTo;
 
     public RentalOrder() {
     }
 
-    public RentalOrder(RentalOrderId rentalOrderId, UserAccount userAccount, Car car) {
-        this.rentalOrderId = rentalOrderId;
-        this.userAccount = userAccount;
-        this.car = car;
+    public RentalOrder(RentalOrderId id, Date dateFrom, Date dateTo) {
+        Id = id;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+    }
+
+    public RentalOrderId getId() {
+        return Id;
+    }
+
+    public void setId(RentalOrderId rentalOrderId) {
+        this.Id = rentalOrderId;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     @Override
@@ -61,11 +56,14 @@ public class RentalOrder {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         RentalOrder that = (RentalOrder) o;
-        return rentalOrderId != null && Objects.equals(rentalOrderId, that.rentalOrderId);
+        return Id != null && Objects.equals(Id, that.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rentalOrderId);
+        return Objects.hash(Id);
     }
+
+
 }
+

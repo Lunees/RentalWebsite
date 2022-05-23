@@ -35,8 +35,8 @@ sida för att se sin order och kunna göra ändringar
 /// admin
 
 
-/admin/customers
-visa alla kunder
+##/admin/customers
+##visa alla kunder
 
 /admin/customer/customer-id
 sida för att uppdatera kunder

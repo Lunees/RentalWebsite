@@ -9,9 +9,4 @@ import java.util.List;
 public interface RentalOrderRepository extends JpaRepository<RentalOrder, RentalOrderId> {
 
 
-    List<RentalOrder> findByRentalOrderId(RentalOrder rentalOrderId);
-
-    public List<RentalOrder> findByUserAccountAccountId(Integer accountId);
-
-    public List<RentalOrder> findByCarCarId(Integer accountId);
 }

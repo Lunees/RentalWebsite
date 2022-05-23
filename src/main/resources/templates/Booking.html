@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Wigells Rental</title>
     <meta charset="utf-8">
@@ -34,15 +34,19 @@
 
 
                 <div>
-                    <form th:action="@{/bookingform/save}" th:object="${rentOrderWrapper}" method="post" >
-                        <label for="carId">
-                            <select th:field="${carOptions}" class="form-control" id="carId">
+                    <form th:action="@{/bookingform/save}" th:object="${rentalOrderId}" method="post">
+
+                        <label>
+                            <select th:field="*{carId}">
                                 <option value="0">Välj bil!</option>
-                                <option th:each="carOptions : ${carOptions}" th:value="${carOptions.carId}" th:text="${carOptions.carBrand + ' ' + carOptions.carModel}"></option>
+                                <option th:each="car : ${car}" th:text="${car.carBrand + ' ' + car.carModel}" th:value="${car.carId}"></option>
                             </select>
                         </label>
                         <label>
-                            <input class="form-control" id="account_Id" type="text" th:value="${customerId.accountId}"/>
+
+                        </label>
+                        <label>
+                            <input class="form-control" id="accountId" type="hidden" th:field="${userAccount.accountId}"/>
 
 
                         </label>

@@ -35,7 +35,7 @@ public class AdminController {
     @GetMapping("/customers/customer-id")
     public ModelAndView updateCustomer(@RequestParam Integer accountId){
         ModelAndView modelAndView = new ModelAndView("/AdminUpdateCustomer");
-        UserAccount customer = userAccountRepository.findById(String.valueOf(accountId)).get();
+        UserAccount customer = userAccountRepository.findById(Long.valueOf(String.valueOf(accountId))).get();
         modelAndView.addObject(customer);
         return modelAndView;
     }
@@ -54,7 +54,7 @@ public class AdminController {
 
     @GetMapping("/delete-customer")
     public String deleteCustomer(@RequestParam Integer userAccountId){
-        userAccountRepository.deleteById(String.valueOf(userAccountId));
+        userAccountRepository.deleteById(Long.valueOf(userAccountId));
         return "redirect:/admin/customers";
     }
 
@@ -93,14 +93,14 @@ public class AdminController {
     @GetMapping("/vehicle/vehicle-id")
     public ModelAndView updateVehicle(@RequestParam Integer carId){
         ModelAndView modelAndView = new ModelAndView("/AdminAddCar");
-        Car car = carRepository.findById(carId).get();
+        Car car = carRepository.findById(Long.valueOf(carId)).get();
         modelAndView.addObject(car);
         return modelAndView;
     }
 
     @GetMapping("/delete-vehicle")
     public String deleteCar(@RequestParam Integer carId){
-        carRepository.deleteById(carId);
+        carRepository.deleteById(Long.valueOf(carId));
         logger.info("car deleted: " + carId);
         return "redirect:/Admin/vehicles";
     }

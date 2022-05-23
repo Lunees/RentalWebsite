@@ -11,33 +11,35 @@ import java.util.Objects;
 @Embeddable
 public class RentalOrderId implements Serializable {
 
-@Column(name = "car_Id",updatable = false,insertable = false)
-private Integer carId;
-@Column(name = "account_Id",updatable = false,insertable = false)
-private Integer accountId;
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "carId", foreignKey = @ForeignKey(name = "car_carId_FK"))
+    private Car carId;
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "AccountId",foreignKey = @ForeignKey(name = "UserAccount_AccountId_FK"))
+    private UserAccount accountId;
 
-    public long getCarId() {
+
+    public Car getCarId() {
         return carId;
     }
 
-    public void setCarId(Integer carId) {
+    public void setCarId(Car carId) {
         this.carId = carId;
     }
 
-    public Integer getAccountId() {
+    public UserAccount getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountId) {
+    public void setAccountId(UserAccount accountId) {
         this.accountId = accountId;
     }
-
-
 
     public RentalOrderId() {
     }
 
-    public RentalOrderId(Integer carId, Integer accountId) {
+    public RentalOrderId(Car carId, UserAccount accountId) {
+        super();
         this.carId = carId;
         this.accountId = accountId;
     }

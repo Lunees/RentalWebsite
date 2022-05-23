@@ -16,7 +16,7 @@ public interface UserAccountService {
     void addRoleToUserAccount(String username, String roleName);
     UserAccount getUser(String username);
     List<UserAccount>getUsers();
-    UserAccount getCustomer(Integer customer);
+    UserAccount getCustomer(Customer customer);
 
 
 

@@ -101,7 +101,7 @@ public class UserAccountDetailsService implements UserAccountService, UserDetail
     }
 
     @Override
-    public UserAccount getCustomer(Integer customer) {
+    public UserAccount getCustomer(Customer customer) {
         logger.info("Fetching customer");
         return userAccountRepository.findByCustomer(customer);
     }

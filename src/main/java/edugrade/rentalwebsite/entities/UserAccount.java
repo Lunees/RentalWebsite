@@ -11,12 +11,12 @@ import java.util.*;
 
 import static javax.persistence.FetchType.EAGER;
 
-@Entity
+@Entity(name = "UserAccount")
 public class UserAccount implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AccountId")
-    private Integer accountId;
+    private Long accountId;
     private String username;
     private String password;
 
@@ -28,25 +28,15 @@ public class UserAccount implements UserDetails {
     @OneToOne(mappedBy = "userAccount",optional = true,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Customer customer;
 
-    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RentalOrder> rentalOrders = new ArrayList<>();
-
-    public List<RentalOrder> getRentalOrders() {
-        return rentalOrders;
-    }
-
-    public void setRentalOrders(List<RentalOrder> rentalOrders) {
-        this.rentalOrders = rentalOrders;
-    }
-
-    public Integer getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountKey) {
-        this.accountId = accountKey;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -55,6 +45,7 @@ public class UserAccount implements UserDetails {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -79,11 +70,10 @@ public class UserAccount implements UserDetails {
         this.customer = customer;
     }
 
+    public UserAccount() {
+    }
 
-
-    public UserAccount(){}
-
-    public UserAccount(Integer accountId, String username, String password, Collection<Role> roles, Customer customer) {
+    public UserAccount(Long accountId, String username, String password, Collection<Role> roles, Customer customer) {
         this.accountId = accountId;
         this.username = username;
         this.password = password;
