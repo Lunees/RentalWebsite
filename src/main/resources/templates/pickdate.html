@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Wigells Rental</title>
     <meta charset="utf-8">
@@ -20,20 +20,38 @@
     <div class="row g-3">
         <div class="col-lg-2">
             <div th:replace="constants/LeftBar :: leftBar">
-
             </div>
         </div>
 
         <div class="col-lg-8">
 
-            <div>
-                <h1>Temp</h1>
+            <div class="container-fluid">
+                <h1>Boka Bil</h1>
                 <p></p>
                 <hr>
-                <h3>Temp</h3>
+                <h3>Ange uppgifter!</h3>
                 <p>
+
+
+                <div>
+                    <form th:action="@{/pickDate/setDate}" th:object="${rentalOrder}" method="post">
+                        <label>Från</label>
+                        <input type="hidden" th:field="*{id}"/>
+
+                        <input type="date" th:field="*{dateFrom}"  class="field"/>
+                        <label>Till</label>
+                        <input type="date" th:field="*{dateTo}"  class="field"/>
+
+
+                        <input type="submit" value="Säkerställ din order!">
+                    </form>
+                </div>
+
             </div>
+
+
         </div>
+
 
         <div class="col-lg-2">
 
@@ -42,10 +60,10 @@
             </div>
 
         </div>
-
     </div>
-
 </div>
+
+
 
 <div th:replace="constants/Footer :: footer">
 

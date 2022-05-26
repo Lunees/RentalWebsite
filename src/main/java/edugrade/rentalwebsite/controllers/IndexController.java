@@ -40,7 +40,6 @@ public class IndexController {
         return currentUserName(securityContextHolder);
     }
 
-
     @GetMapping("/template")
     public ModelAndView fetchTemplate() {
         ModelAndView modelAndView = new ModelAndView("/Template");

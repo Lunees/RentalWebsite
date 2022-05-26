@@ -27,38 +27,39 @@
         <div class="col-lg-8">
 
             <div>
-            <h1>Coola bilar du kan hyra hos oss</h1>
+            <h1>Kunder och användarkonton</h1>
             <p></p>
             <hr>
-            <h3>Tillgängliga bilar</h3>
+            <h3>Registrerade konton</h3>
             <p>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Märke</th>
-                        <th scope="col">Modell</th>
-                        <th scope="col">Pris per dag</th>
+                        <th scope="col">KontoNummer</th>
+                        <th scope="col">Användarnamn</th>
+                        <th scope="col">För och efternamn</th>
+                        <th scope="col">Kontakt nummer</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                        <tr th:each="cars : ${cars}">
-                            <td><span th:text="${cars.carId}"></span></td>
-                            <td><span th:text="${cars.carBrand}"></span></td>
-                            <td><span th:text="${cars.carModel}"></span></td>
-                            <td><span th:text="${cars.dailyPrice}"></span></td>
-                    </tr>
+                        <tr th:each="userAccounts : ${userAccounts}">
+                            <td><span th:text="${userAccounts.accountId}"></span></td>
+                            <td><span th:text="${userAccounts.username}"></span></td>
+                            <td><span th:text="${userAccounts.customer.firstName + ' ' + userAccounts.customer.lastName}"></span></td>
+                            <td><span th:text="${userAccounts.customer.phoneNumber}"></span></td>
+                            <td>
+                                <a th:href="@{/admin/customers/customer-id(username=${userAccounts.username})}" class="btn btn-sm">Uppdatera</a>
+                                <a th:href="@{/delete-customer(username=${userAccounts.username})}" class="btn btn-sm">Ta bort</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <p>
                 <div class="container">
-                <div sec:authorize-url="/admin">
-                <a class="btn btn-secondary" role="button" href="/admin/add-vehicle">Lägg till ny bil</a>
-                </div>
-                <div sec:authorize="isAuthenticated()">
-                    <a role="button" class="btn btn-secondary" href="/bookingform">Hyr en bil!</a>
-                </div>
+                    <div sec:authorize-url="/admin">
+                        <a class="btn btn-secondary" role="button" href="/admin/add-vehicle">Registrera ny kund</a>
+                    </div>
                 </div>
             </div>
         </div>

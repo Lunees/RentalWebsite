@@ -15,8 +15,9 @@ public class RentalOrderId implements Serializable {
     @JoinColumn(name = "carId", foreignKey = @ForeignKey(name = "car_carId_FK"))
     private Car carId;
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "AccountId",foreignKey = @ForeignKey(name = "UserAccount_AccountId_FK"))
+    @JoinColumn(name = "accountId",foreignKey = @ForeignKey(name = "UserAccount_AccountId_FK"))
     private UserAccount accountId;
+
 
 
     public Car getCarId() {
@@ -42,6 +43,7 @@ public class RentalOrderId implements Serializable {
         super();
         this.carId = carId;
         this.accountId = accountId;
+
     }
 
     @Override

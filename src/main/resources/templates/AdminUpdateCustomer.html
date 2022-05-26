@@ -27,13 +27,13 @@
         <div class="col-lg-8">
 
             <div>
-                <h1>Skapa ditt konto!</h1>
+                <h1>Uppdatera kund</h1>
                 <p></p>
                 <hr>
-                <h3>Lägg till uppgifter</h3>
+                <h3>Lägg till eller ändra uppgifter</h3>
                 <p>
-                <form method="post" th:action="@{/register/save}" th:object="${account}">
-                    <div th:object="${customer}">
+                <form method="post" th:action="@{/admin/save-customer}" th:object="${account}">
+
                         <div class="form-group">
                         <label for="username">Användarnamn</label>
                     <input type="hidden" th:field="${account.accountId}" name="id"/>
@@ -43,7 +43,8 @@
                             <label for="password">Lösenord</label>
                     <input type="text" th:field="${account.password}" name="password" id="password"/>
                         </div>
-                            <div class="form-group">
+                <div th:object="${customer}">
+                            <div class="form-group" >
                                 <label for="firstName">Namn</label>
                         <input type="hidden" th:field="${customer.customerId}" name="customerId" />
                         <input type="text" th:field="${customer.firstName}" name="firstName" id="firstName"/>
@@ -60,8 +61,10 @@
                                             <label for="PhoneNumber">Telefon nummer</label>
                         <input type="text" th:field="${customer.phoneNumber}" name="phoneNumber" id="phoneNumber"/>
                                         </div>
-
-            <input type="submit" value="Skapa konto">
+                                    <div class="form-group">
+                                        <input type="hidden" th:field="${customer.userAccount}" name="userAccount" id="userAccount"/>
+                                    </div>
+            <input type="submit" value="Uppdatera konto">
                     </div>
                 </form>
                     </div>

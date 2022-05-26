@@ -9,6 +9,7 @@ import java.util.Objects;
 @Entity
 public class Customer {
     @Id
+    @Column(name="customerId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
 
@@ -21,7 +22,7 @@ public class Customer {
     private Integer phoneNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @JoinColumn(name = "accountId")
     private UserAccount userAccount;
 
     public Integer getCustomerId() {

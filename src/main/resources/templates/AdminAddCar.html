@@ -27,42 +27,29 @@
         <div class="col-lg-8">
 
             <div>
-                <h1>Skapa ditt konto!</h1>
+                <h1>Lägg till bil här</h1>
                 <p></p>
                 <hr>
-                <h3>Lägg till uppgifter</h3>
                 <p>
-                <form method="post" th:action="@{/register/save}" th:object="${account}">
-                    <div th:object="${customer}">
+                <form method="post" th:action="@{/admin/save-car}" th:object="${newCar}">
+
                         <div class="form-group">
-                        <label for="username">Användarnamn</label>
-                    <input type="hidden" th:field="${account.accountId}" name="id"/>
-                    <input type="text" th:field="${account.username}" name="username" id="username"/>
+                        <label for="carBrand">Bilmärke</label>
+                    <input type="hidden" th:field="${newCar.carId}" name="carBrand"/>
+                    <input type="text" th:field="${newCar.carBrand}" name="carBrand" id="carBrand"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Lösenord</label>
-                    <input type="text" th:field="${account.password}" name="password" id="password"/>
+                            <label for="carModel">Bilmodell</label>
+                    <input type="text" th:field="${newCar.carModel}" name="carModel" id="carModel"/>
                         </div>
                             <div class="form-group">
-                                <label for="firstName">Namn</label>
-                        <input type="hidden" th:field="${customer.customerId}" name="customerId" />
-                        <input type="text" th:field="${customer.firstName}" name="firstName" id="firstName"/>
+                                <label for="dailyPrice">Pris per dag</label>
+                        <input type="text" th:field="${newCar.dailyPrice}" name="dailyPrice" id="dailyPrice"/>
                             </div>
-                                <div class="form-group">
-                                    <label for="lastName">Efternamn</label>
-                        <input type="text" th:field="${customer.lastName}" name="lastName" id="lastName"/>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="address">Address</label>
-                        <input type="text" th:field="${customer.address}" name="address" id="address"/>
-                                    </div>
-                                        <div class="form-group">
-                                            <label for="PhoneNumber">Telefon nummer</label>
-                        <input type="text" th:field="${customer.phoneNumber}" name="phoneNumber" id="phoneNumber"/>
-                                        </div>
 
-            <input type="submit" value="Skapa konto">
-                    </div>
+
+            <input type="submit" value="Skapa bil">
+
                 </form>
                     </div>
             </div>

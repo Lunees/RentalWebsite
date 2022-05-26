@@ -11,6 +11,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount,Long> {
 
     UserAccount findByCustomer(Customer customer);
 
+    UserAccount findUserAccountByUsername(String username);
 
 
 }

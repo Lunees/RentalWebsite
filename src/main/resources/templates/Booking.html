@@ -34,21 +34,23 @@
 
 
                 <div>
-                    <form th:action="@{/bookingform/save}" th:object="${rentalOrderId}" method="post">
+                    <form th:action="@{/bookingform/save}" th:object="${rentalOrder}" method="post">
 
                         <label>
-                            <select th:field="*{carId}">
+                            <select th:field="*{Id.carId}">
                                 <option value="0">Välj bil!</option>
                                 <option th:each="car : ${car}" th:text="${car.carBrand + ' ' + car.carModel}" th:value="${car.carId}"></option>
                             </select>
                         </label>
                         <label>
-
+                            <label>Från</label>
+                            <input type="date" th:field="*{dateFrom}"  class="field"/>
+                            <label>Till</label>
+                            <input type="date" th:field="*{dateTo}"  class="field"/>
                         </label>
                         <label>
-                            <input class="form-control" id="accountId" type="hidden" th:field="${userAccount.accountId}"/>
-
-
+                            <input type="hidden" th:value="${userAccount.accountId}" th:name="Id.accountId" th:id="accountId"  class="form-control"/>
+                            <input type="hidden" th:field="*{orderId}" class="form-control"/>
                         </label>
                         <input type="submit" value="Hyr bil!">
                     </form>

@@ -33,32 +33,32 @@
                 <h3>Lägg till uppgifter</h3>
                 <p>
                 <form method="post" th:action="@{/register/save}" th:object="${account}">
-                    <div th:object="${customer}">
-                        <div class="form-group">
+                    <div class="form-group">
                         <label for="username">Användarnamn</label>
-                    <input type="hidden" th:field="${account.accountId}" name="id"/>
-                    <input type="text" th:field="${account.username}" name="username" id="username"/>
+                    <input type="hidden" th:field="*{accountId}" name="id"/>
+                    <input type="text" th:field="*{username}" name="username" id="username"/>
                         </div>
                         <div class="form-group">
                             <label for="password">Lösenord</label>
-                    <input type="text" th:field="${account.password}" name="password" id="password"/>
+                    <input type="text" th:field="*{password}" name="password" id="password"/>
                         </div>
+                        <div th:object="${customer}">
                             <div class="form-group">
                                 <label for="firstName">Namn</label>
-                        <input type="hidden" th:field="${customer.customerId}" name="customerId" />
-                        <input type="text" th:field="${customer.firstName}" name="firstName" id="firstName"/>
+                        <input type="hidden" th:field="*{customerId}" name="customerId" />
+                        <input type="text" th:field="*{firstName}" name="firstName" id="firstName"/>
                             </div>
                                 <div class="form-group">
                                     <label for="lastName">Efternamn</label>
-                        <input type="text" th:field="${customer.lastName}" name="lastName" id="lastName"/>
+                        <input type="text" th:field="*{lastName}" name="lastName" id="lastName"/>
                                 </div>
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                        <input type="text" th:field="${customer.address}" name="address" id="address"/>
+                        <input type="text" th:field="*{address}" name="address" id="address"/>
                                     </div>
                                         <div class="form-group">
                                             <label for="PhoneNumber">Telefon nummer</label>
-                        <input type="text" th:field="${customer.phoneNumber}" name="phoneNumber" id="phoneNumber"/>
+                        <input type="text" th:field="*{phoneNumber}" name="phoneNumber" id="phoneNumber"/>
                                         </div>
 
             <input type="submit" value="Skapa konto">

@@ -15,17 +15,13 @@ import static javax.persistence.FetchType.EAGER;
 public class UserAccount implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "AccountId")
+    @Column(name = "accountId")
     private Long accountId;
     private String username;
     private String password;
-
-    @ManyToMany(fetch = EAGER)
+    @ManyToMany(fetch = EAGER,cascade = CascadeType.ALL)
     private Collection<Role> roles = new ArrayList<>();
-
-
-
-    @OneToOne(mappedBy = "userAccount",optional = true,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "userAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Customer customer;
 
     public Long getAccountId() {

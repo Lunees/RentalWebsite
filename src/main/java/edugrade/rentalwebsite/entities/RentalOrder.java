@@ -11,7 +11,10 @@ import java.util.Objects;
 @Entity
 public class RentalOrder  {
     @EmbeddedId
-    private RentalOrderId Id;
+    private RentalOrderId id;
+
+    @Column(name = "orderId", columnDefinition = "bigint not null auto_increment")
+    private Long orderId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFrom;
@@ -21,18 +24,27 @@ public class RentalOrder  {
     public RentalOrder() {
     }
 
-    public RentalOrder(RentalOrderId id, Date dateFrom, Date dateTo) {
-        Id = id;
+    public RentalOrder(RentalOrderId id, Long orderId, Date dateFrom, Date dateTo) {
+        this.id = id;
+        this.orderId = orderId;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
     }
 
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
     public RentalOrderId getId() {
-        return Id;
+        return id;
     }
 
     public void setId(RentalOrderId rentalOrderId) {
-        this.Id = rentalOrderId;
+        this.id = rentalOrderId;
     }
 
     public Date getDateFrom() {
@@ -56,12 +68,12 @@ public class RentalOrder  {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         RentalOrder that = (RentalOrder) o;
-        return Id != null && Objects.equals(Id, that.Id);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
 

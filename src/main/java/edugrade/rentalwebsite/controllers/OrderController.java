@@ -1,19 +1,18 @@
 package edugrade.rentalwebsite.controllers;
 
-import edugrade.rentalwebsite.dtos.RentalOrderDTO;
-import edugrade.rentalwebsite.dtos.RentalOrderIdDTO;
 import edugrade.rentalwebsite.entities.RentalOrder;
 import edugrade.rentalwebsite.entities.RentalOrderId;
+import edugrade.rentalwebsite.entities.UserAccount;
 import edugrade.rentalwebsite.repositories.CarRepository;
 import edugrade.rentalwebsite.repositories.RentalOrderRepository;
 
 
+import edugrade.rentalwebsite.repositories.UserAccountRepository;
 import edugrade.rentalwebsite.services.RentalOrderService;
 import edugrade.rentalwebsite.services.UserAccountDetailsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import java.security.Principal;
+import java.util.List;
+
 
 
 @Controller
@@ -32,6 +33,8 @@ public class OrderController {
     CarRepository carRepository;
     @Autowired
     RentalOrderRepository rentalOrderRepository;
+    @Autowired
+    UserAccountRepository userAccountRepository;
 
     @Autowired
     UserAccountDetailsService userAccountDetailsService;
@@ -49,45 +52,39 @@ public class OrderController {
     }
 
     @PostMapping("/bookingform/save")
-    public String registerBooking(@ModelAttribute RentalOrderId rentalOrderId){
-
-        System.out.println(rentalOrderId.getCarId());
-        rentalOrderService.SaveOrder(rentalOrderId);
-        return "redirect:/list-cars";
-    }
-
-    @PostMapping("/delete-booking")
-    public String deleteBooking(@RequestParam RentalOrder rentalOrderId){
-        rentalOrderRepository.delete(rentalOrderId);
-        logger.info("Removing order " + rentalOrderId);
+    public String registerBooking(@ModelAttribute RentalOrder rentalOrder){
+        rentalOrderRepository.save(rentalOrder);
+        logger.info("Creating a new order");
         return "redirect:/orders/customer-id";
     }
 
 
+
+
     @GetMapping("/orders/customer-id")
-    public ModelAndView OrderListModel(){
+    public ModelAndView OrderListModel(Principal principal){
         ModelAndView modelAndView = new ModelAndView("/OrderList");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object customerId = auth.getPrincipal();
-
-
+        String userName = principal.getName();
+        UserAccount userAccount = userAccountRepository.findByUsername(userName);
+        List<RentalOrder> rentalOrderList = rentalOrderRepository.findByIdAccountId(userAccount);
+        modelAndView.addObject("rentalOrderList",rentalOrderList);
+        logger.info("Fetching list of orders for customer");
         return modelAndView;
+    }
+
+    @GetMapping("/delete-booking")
+    public String deleteBooking(@RequestParam(value="id")Long id){
+        RentalOrder rentalOrder = rentalOrderRepository.findRentalOrderByOrderId(id);
+        rentalOrderRepository.delete(rentalOrder);
+        logger.info("Removing order");
+        return "redirect:/orders/customer-id";
     }
 
     @GetMapping("/update/booking-id")
-    public ModelAndView OrderListUpdateModel(@RequestParam RentalOrder rentalOrder){
-        ModelAndView modelAndView = new ModelAndView("/UpdateBooking");
-
-
-
-
-        return modelAndView;
+    public ModelAndView orderUpdate(Principal principal,@RequestParam(value = "id")Long id){
+        ModelAndView modelAndView = new ModelAndView("/booking");
+        RentalOrder rentalOrder = rentalOrderRepository.getRentalOrderByOrderId(id);
+        modelAndView.addObject("rentalOrder",rentalOrder);
+        return rentalOrderService.updateOrder(principal,id);
     }
-
-
-
-
-
-
-
 }

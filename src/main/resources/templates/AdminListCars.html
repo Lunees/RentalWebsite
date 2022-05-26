@@ -50,8 +50,8 @@
                             <td><span th:text="${cars.carModel}"></span></td>
                             <td><span th:text="${cars.dailyPrice}"></span></td>
                             <td>
-                                <a th:href="@{/Admin/vehicle/vehicle-id(carId=${cars.carId})}" class="btn btn-secondary">Ändra</a>
-                                <a th:href="@{/Admin/delete-vehicle(carId=${cars.carId})}" class="btn btn-secondary">Ta bort</a>
+                                <a th:href="@{/admin/vehicle/vehicle-id(carId=${cars.carId})}" class="btn btn-secondary">Ändra</a>
+                                <a th:href="@{/admin/delete-vehicle(carId=${cars.carId})}" class="btn btn-secondary">Ta bort</a>
                             </td>
                     </tr>
                     </tbody>

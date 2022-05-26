@@ -32,22 +32,4 @@ public class CarsController {
 
         return modelAndView;
     }
-
-
-
-   /* @RequestMapping(value = "/baseElementLevel", method = RequestMethod.POST)
-    public String baseElementLevelPOST(@ModelAttribute("amount") String amount,
-                                       @ModelAttribute("selectedElementName") String selectedElementName, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-
-        user.setSelectedBaseElement(
-                elementService.findByNameAndUserUserId(selectedElementName, user.getUserId()).getId());
-
-
-        userService.save(user);
-
-        return "redirect:/account/elementView";
-    }    */
-
-
 }

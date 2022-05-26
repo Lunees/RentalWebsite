@@ -68,8 +68,8 @@ public class UserAccountDetailsService implements UserAccountService, UserDetail
     public void saveCustomer(UserAccount userAccount, Customer customer) {
         logger.info("Saving new Customer account " + userAccountRepository.findByUsername(userAccount.getUsername()));
         userAccountRepository.save(userAccount);
-        userAccount.setUserAccount(customer);
         customerRepository.save(customer);
+        customer.setUserAccount(userAccount);
 
 
     }
